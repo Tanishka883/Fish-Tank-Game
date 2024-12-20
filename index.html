@@ -8,17 +8,40 @@
 </head>
 <body>
     <div id="game-container">
-        <h1>Aquarium Game</h1>
-        <div id="shop">
-            <h2>Shop</h2>
-            <button id="play-game">Play Mini Game</button>
-            <p id="food-count">Food: 0</p>
+        <h1>Fish Tank Game</h1>
+        <div id="tank">
+          <div class="fish orange" id="fish1"></div>
+          <div class="fish green" id="fish2"></div>
+          <div class="fish purple" id="fish3"></div>
+          <div class="fish blue" id="fish4"></div>
+          <div class="fish red" id="fish5"></div>
         </div>
-        <div id="aquarium">
-            <h2>Aquarium</h2>
-            <div id="fish-container"></div>
+        <div id="controls">
+            <br>
+            <br>
+          <p id="status">Feed each fish before its timer runs out!</p>
+          <div>
+            <p>Time left for Fish 1: <span id="time1">10</span> seconds</p>
+            <button class="feed-btn" id="feed-fish1">Feed Fish 1</button>
+          </div>
+          <div>
+            <p>Time left for Fish 2: <span id="time2">12</span> seconds</p>
+            <button class="feed-btn" id="feed-fish2">Feed Fish 2</button>
+          </div>
+          <div>
+            <p>Time left for Fish 3: <span id="time3">15</span> seconds</p>
+            <button class="feed-btn" id="feed-fish3">Feed Fish 3</button>
+          </div>
+          <div>
+            <p>Time left for Fish 4: <span id="time4">14</span> seconds</p>
+            <button class="feed-btn" id="feed-fish4">Feed Fish 4</button>
+          </div>
+          <div>
+            <p>Time left for Fish 5: <span id="time5">13</span> seconds</p>
+            <button class="feed-btn" id="feed-fish5">Feed Fish 5</button>
+          </div>
         </div>
-    </div>
-    <script src="game.js"></script>
+      </div>
+      <script src="game.js"></script>
 </body>
 </html>

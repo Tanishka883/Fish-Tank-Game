@@ -1,33 +1,131 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #e0f7fa;
-    color: #00796b;
-}
-
-#game-container {
-    text-align: center;
-    margin: 20px;
-}
-
-#shop, #aquarium {
-    border: 2px solid #00796b;
+    background-color: #a0d3ff;
+    margin: 200px;
     padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-}
-
-#fish-container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-}
+    align-items: center;
+    height: 100vh;
+  }
 
-.fish {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-    background-color: #ffcc80;
-    border-radius: 50%;
+  #game-container {
+    text-align: center;
+    width: 600px;
+  }
+
+  #tank {
+    background: linear-gradient(to bottom, #89cff0, #0077be);
+    border: 5px solid #005fa3;
+    height: 400px;
+    width: 100%;
     position: relative;
-}
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 15px;
+
+  }
+
+  .fish {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-timing-function: linear;
+  }
+
+  .fish::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    left: 5px;
+    top: 8px;
+  }
+
+  .fish::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 15px;
+    background: inherit;
+    border-radius: 50%;
+    top: 7px;
+    left: -10px;
+    transform-origin: left center;
+    animation: tail 0.4s infinite alternate ease-in-out;
+  }
+
+  @keyframes tail {
+    from {
+      transform: rotate(-10deg);
+    }
+    to {
+      transform: rotate(10deg);
+    }
+  }
+
+  /* Fish Colors and Animations */
+  .fish.orange { background-color: orange; animation: swim1 6s infinite linear; top: 50px; }
+  .fish.green { background-color: green; animation: swim2 8s infinite linear; top: 120px; }
+  .fish.purple { background-color: purple; animation: swim3 10s infinite linear; top: 190px; }
+  .fish.blue { background-color: blue; animation: swim4 7s infinite linear; top: 260px; }
+  .fish.red { background-color: red; animation: swim5 9s infinite linear; top: 330px; }
+
+  @keyframes swim1 {
+    0% { transform: translateX(-60px); }
+    100% { transform: translateX(600px); }
+  }
+
+  @keyframes swim2 {
+    0% { transform: translateX(600px) scaleX(-1); }
+    100% { transform: translateX(-60px) scaleX(-1); }
+  }
+
+  @keyframes swim3 {
+    0% { transform: translateX(-60px); }
+    100% { transform: translateX(600px); }
+  }
+
+  @keyframes swim4 {
+    0% { transform: translateX(600px) scaleX(-1); }
+    100% { transform: translateX(-60px) scaleX(-1); }
+  }
+
+  @keyframes swim5 {
+    0% { transform: translateX(-60px); }
+    100% { transform: translateX(600px); }
+  }
+
+  #controls {
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #0077be;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  button:hover {
+    background-color: #005fa3;
+  }
+
+  #status {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .feed-btn {
+    margin: 5px;
+  }

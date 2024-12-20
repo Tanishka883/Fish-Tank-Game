@@ -1,58 +1,64 @@
-let foodCount = 0;
-const fishContainer = document.getElementById('fish-container');
-const foodCountDisplay = document.getElementById('food-count');
+const fishTimers = [
+    { id: "fish1", timeLeft: 10 },
+    { id: "fish2", timeLeft: 12 },
+    { id: "fish3", timeLeft: 15 },
+    { id: "fish4", timeLeft: 14 },
+    { id: "fish5", timeLeft: 13 },
+  ];
 
-class Fish {
-    constructor(name) {
-        this.name = name;
-        this.energy = Math.random() * 100;
-        this.element = this.createFishElement();
-        this.updateEnergy();
-    }
+  const timerElements = {
+    fish1: document.getElementById("time1"),
+    fish2: document.getElementById("time2"),
+    fish3: document.getElementById("time3"),
+    fish4: document.getElementById("time4"),
+    fish5: document.getElementById("time5"),
+  };
 
-    createFishElement() {
-        const fishElement = document.createElement('div');
-        fishElement.classList.add('fish');
-        fishElement.innerText = this.name;
-        fishContainer.appendChild(fishElement);
-        return fishElement;
-    }
+  const statusElement = document.getElementById("status");
 
-    updateEnergy() {
-        this.energy -= Math.random() * 10; // Decrease energy over time
-        if (this.energy <= 0) {
-            this.die();
-        } else {
-            setTimeout(() => this.updateEnergy(), 2000); // Update energy every 2 seconds
+  const interval = setInterval(() => {
+    let allDead = true;
+    fishTimers.forEach((fish) => {
+      if (fish.timeLeft > 0) {
+        fish.timeLeft--;
+        timerElements[fish.id].textContent = fish.timeLeft;
+        allDead = false;
+
+        if (fish.timeLeft === 0) {
+          document.getElementById(fish.id).style.display = "none";
+          statusElement.textContent = "Oh no! A fish has died!";
         }
+      }
+    });
+
+    if (allDead) {
+      clearInterval(interval);
+      statusElement.textContent = "Game Over! All fishes have died.";
     }
+  }, 1000);
 
-    die() {
-        this.element.remove();
-        alert(`${this.name} has died!`);
+  document.getElementById("feed-fish1").addEventListener("click", () => {
+    feedFish("fish1");
+  });
+  document.getElementById("feed-fish2").addEventListener("click", () => {
+    feedFish("fish2");
+  });
+  document.getElementById("feed-fish3").addEventListener("click", () => {
+    feedFish("fish3");
+  });
+  document.getElementById("feed-fish4").addEventListener("click", () => {
+    feedFish("fish4");
+  });
+  document.getElementById("feed-fish5").addEventListener("click", () => {
+    feedFish("fish5");
+  });
+
+  function feedFish(fishId) {
+    const fish = fishTimers.find((f) => f.id === fishId);
+    if (fish.timeLeft > 0) {
+      fish.timeLeft = 240;
+      timerElements[fishId].textContent = fish.timeLeft;
+      statusElement.textContent =`You fed ${fishId}!`;
+      document.getElementById(fishId).style.display = "block";
     }
-
-    feed() {
-        this.energy += 20;
-        if (this.energy > 100) this.energy = 100;
-    }
-}
-
-const fishNames = ['Goldfish', 'Betta', 'Guppy', 'Tetra'];
-const fishes = fishNames.map(name => new Fish(name));
-
-document.getElementById('play-game').addEventListener('click', () => {
-    // Simple mini-game: Randomly earn food
-    const earnedFood = Math.floor(Math.random() * 10) + 1;
-    foodCount += earnedFood;
-    foodCountDisplay.innerText = `Food: ${foodCount}`;
-    alert(`You earned ${earnedFood} food!`);
-});
-
-setInterval(() => {
-    if (foodCount > 0) {
-        fishes.forEach(fish => fish.feed());
-        foodCount--;
-        foodCountDisplay.innerText = `Food: ${foodCount}`;
-    }
-}, 5000); // Feed fish every 5 seconds if food is available
+  }
